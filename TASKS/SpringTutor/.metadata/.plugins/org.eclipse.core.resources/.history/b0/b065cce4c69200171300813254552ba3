@@ -1,0 +1,334 @@
+package com.controller;
+
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.namespace.QName;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.model.VariableModule;
+import com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.CalculateSupplierQuoteFault;
+import com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ManageSupplierQuoteRequestForQuotation;
+import com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ManageSupplierQuoteRequestForQuotationMeerkat;
+import com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.EmailAddress;
+import com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.FunctionSpecification;
+import com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.FunctionValueSpecification;
+
+
+
+@RestController
+public class MyController {
+	
+	
+	
+	//For passing Rest Based Parameters to Meerkat
+	@RequestMapping(value="myMapping", method=RequestMethod.POST,consumes="application/json")
+	public @ResponseBody String myController(@RequestBody VariableModule variableModule) throws DatatypeConfigurationException{
+		webservice(variableModule);
+		System.out.println("controller");
+		return variableModule.getLocalRefId();
+	}
+	
+	@RequestMapping(value="home")
+	public ModelAndView homePage(){
+		ModelAndView model = new ModelAndView("home");
+		return model;
+	}
+	
+	public void webservice(VariableModule variableModule) throws DatatypeConfigurationException{
+		
+		
+		String localRefId=variableModule.getLocalRefId();
+		String QuoteItemID=variableModule.getQuoteItemID();
+		String country=variableModule.getCountry();
+		String buildingnumber=variableModule.getBuildingnumber();
+		String streetname=variableModule.getStreetname();
+		String postalcode=variableModule.getPostalcode();
+		String lattitude=variableModule.getLattitude();
+		String longitude=variableModule.getLongitude();
+		String cityname=variableModule.getCityname();
+		String statename=variableModule.getCityname();
+		String serviceid=variableModule.getServiceid();
+		String servicename=variableModule.getServicename();
+		String tech_input=variableModule.getTech_input();
+		String speed_input=variableModule.getSpeed_input();
+		
+		System.out.println(localRefId);
+		System.out.println(QuoteItemID);
+		System.out.println(country);
+		System.out.println(buildingnumber);
+		System.out.println(streetname);
+		System.out.println(postalcode);
+		System.out.println(lattitude);
+		System.out.println(longitude);
+		System.out.println(cityname);
+		System.out.println(statename);
+		System.out.println(serviceid);
+		System.out.println(servicename);
+		System.out.println(tech_input);
+		System.out.println(speed_input);
+		
+		final QName SERVICE_NAME = new QName("http://www.orange.com/Meerkat/Interfaces/ManageSupplierQuote/RequestForQuotation/v1", "ManageSupplierQuoteRequestForQuotation_Meerkat");
+
+		URL wsdlURL = ManageSupplierQuoteRequestForQuotationMeerkat.WSDL_LOCATION;
+		String  args[]=new String[5];
+        if (args.length > 0 && args[0] != null && !"".equals(args[0])) { 
+            File wsdlFile = new File(args[0]);
+            try {
+                if (wsdlFile.exists()) {
+                    wsdlURL = wsdlFile.toURI().toURL();
+                } else {
+                    wsdlURL = new URL(args[0]);
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+      //  model.addAttribute("quote", quote);
+        System.out.println();
+       
+     //   System.out.println(quote.getLocalRefId());
+        
+	      
+	        ManageSupplierQuoteRequestForQuotationMeerkat ss = new ManageSupplierQuoteRequestForQuotationMeerkat(wsdlURL, SERVICE_NAME);
+	        ManageSupplierQuoteRequestForQuotation port = ss.getManageSupplierQuoteRequestForQuotationPort();  
+	        
+	        {
+	        	
+	        insertintoRequesttable(localRefId,QuoteItemID,country,buildingnumber,streetname,postalcode,lattitude,longitude,cityname,statename,serviceid,servicename,tech_input,speed_input);
+
+	        System.out.println("Invoking calculateSupplierQuote...");
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.SupplierQuoteViewForCalculateSupplierQuoteRequest _calculateSupplierQuote_supplierQuote = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.SupplierQuoteViewForCalculateSupplierQuoteRequest();
+	        _calculateSupplierQuote_supplierQuote.setLocalCreationDate(javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-09-05T15:24:16.604+05:30"));
+	        _calculateSupplierQuote_supplierQuote.setLocalCallingSystem("WebALC");
+	        _calculateSupplierQuote_supplierQuote.setLocalBusinessOpportunityType("BO_7");
+	        _calculateSupplierQuote_supplierQuote.setLocalAccessType("AT_9");
+	        _calculateSupplierQuote_supplierQuote.setLocalRefId(localRefId+"POCtest0001");
+	        _calculateSupplierQuote_supplierQuote.setEndCustomerID("46680");
+	        _calculateSupplierQuote_supplierQuote.setEndCustomerName("ARROW");
+	        java.util.List<com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.QuoteItem> _calculateSupplierQuote_supplierQuoteQuoteItem = new java.util.ArrayList<com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.QuoteItem>();
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.QuoteItem _calculateSupplierQuote_supplierQuoteQuoteItemVal1 = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.QuoteItem();
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1.setQuoteItemID(QuoteItemID+"POCtest0001");
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.OfferSpecification _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecification = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.OfferSpecification();
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecification.setOfferSpecificationCode(serviceid);
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecification.setOfferSpecificationLabel(servicename);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Currency _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationCurrency = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Currency();
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationCurrency.setCurrencyCode("USD");
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecification.setCurrency(_calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationCurrency);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.CommitmentSpecification _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationCommitmentSpecification = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.CommitmentSpecification();
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationCommitmentSpecification.setDurationValue(1);
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationCommitmentSpecification.setDurationUnit("year");
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecification.setCommitmentSpecification(_calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationCommitmentSpecification);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.ProductSpecification _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecification = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.ProductSpecification();
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecification.setProductSpecificationType(tech_input);
+	        java.util.List<com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.FunctionSpecification> _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationFunctionSpecification = new java.util.ArrayList<com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.FunctionSpecification>();
+	        FunctionSpecification functionSpecification1 =new  FunctionSpecification();
+	        functionSpecification1.setFunctionSpecificationLabel("Speed");
+	        FunctionValueSpecification value = new FunctionValueSpecification();
+	        value.setFunctionValue(speed_input);
+	        functionSpecification1.setFunctionValueSpecification(value);
+//	        FunctionSpecification functionSpecification2 =new  FunctionSpecification();
+//	        functionSpecification2.setFunctionSpecificationLabel("Up Speed");
+//	        FunctionValueSpecification value2 = new FunctionValueSpecification();
+//	        value2.setFunctionValue(speed_input_up);
+//	        functionSpecification2.setFunctionValueSpecification(value2);
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationFunctionSpecification.add(functionSpecification1);
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecification.getFunctionSpecification().addAll(_calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationFunctionSpecification);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.SubNetwork _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetwork = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.SubNetwork();
+	        java.util.List<java.lang.String> _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetworkSubNetworkID = new java.util.ArrayList<java.lang.String>();
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetworkSubNetworkID.add("BHXX01");
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetworkSubNetworkID.add("DCSX01");
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetworkSubNetworkID.add("LONT04");
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetworkSubNetworkID.add("LONX03");
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetwork.getSubNetworkID().addAll(_calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetworkSubNetworkID);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.SubNetworkRole _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetworkSubNetworkRole = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.SubNetworkRole();
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetworkSubNetworkRole.setSubNetworkRoleName("POP");
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetwork.setSubNetworkRole(_calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetworkSubNetworkRole);
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecification.setSubNetwork(_calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecificationSubNetwork);
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecification.setProductSpecification(_calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecificationProductSpecification);
+	        _calculateSupplierQuote_supplierQuoteQuoteItemVal1.setOfferSpecification(_calculateSupplierQuote_supplierQuoteQuoteItemVal1OfferSpecification);
+	        _calculateSupplierQuote_supplierQuoteQuoteItem.add(_calculateSupplierQuote_supplierQuoteQuoteItemVal1);
+	        _calculateSupplierQuote_supplierQuote.getQuoteItem().addAll(_calculateSupplierQuote_supplierQuoteQuoteItem);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.OperatorQuote _calculateSupplierQuote_supplierQuoteOperatorQuote = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.OperatorQuote();
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.QuoteItemOQ _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItem = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.QuoteItemOQ();
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.OfferSpecificationOQ _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemOfferSpecification = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.OfferSpecificationOQ();
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemOfferSpecification.setOfferSpecificationCode(serviceid);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemOfferSpecification.setOfferSpecificationLabel(servicename);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemOfferSpecification.setOfferGrade("any");
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemOfferSpecification.setSymmetry("any");
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItem.setOfferSpecification(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemOfferSpecification);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Site _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSite = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Site();
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSite.setSiteName("Customer Site");
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Address _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Address();
+	        String staircaseNumber=null;
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setStaircaseNumber(staircaseNumber);
+	        String floorNumber=null;
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setFloorNumber(floorNumber);
+	        String buildingName=null;
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setBuildingName(buildingnumber);
+	        String residenceName=null;
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setResidenceName(residenceName);
+	        String locality=null;
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setLocality(locality);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setApartmentNumber("1");
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setPostalCode(postalcode);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.GeographicCoordinates _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressGeographicCoordinates = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.GeographicCoordinates();
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressGeographicCoordinates.setGeocodeX(lattitude);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressGeographicCoordinates.setGeocodeY(longitude);
+	        String geocodingSystems = null;
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressGeographicCoordinates.setGeocodingSystems(geocodingSystems);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setGeographicCoordinates(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressGeographicCoordinates);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Street _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressStreet = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Street();
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressStreet.setStreetNumber("1");
+	        String streetLetter=null;
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressStreet.setStreetLetter(streetLetter);
+	        String streetType=null;
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressStreet.setStreetType(streetType);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressStreet.setStreetName(streetname);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setStreet(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressStreet);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.City _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressCity = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.City();
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressCity.setCityName(cityname);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setCity(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressCity);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.State _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressState = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.State();
+	        String stateName=null;
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressState.setStateName(statename);
+	        
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setState(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressState);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Country _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressCountry = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.Country();
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressCountry.setCountryCode(country);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress.setCountry(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddressCountry);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSite.setAddress(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSiteAddress);
+	        com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.PhoneNumber _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSitePhoneNumber = new com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.in.PhoneNumber();
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSitePhoneNumber.setNumber("0");
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSite.setPhoneNumber(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSitePhoneNumber);
+	        EmailAddress email = new EmailAddress();
+	        email.setEMailAddress(null);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSite.setEmailAddress(email);
+	        
+	        _calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItem.setSite(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItemSite);
+	        _calculateSupplierQuote_supplierQuoteOperatorQuote.setQuoteItem(_calculateSupplierQuote_supplierQuoteOperatorQuoteQuoteItem);
+	        _calculateSupplierQuote_supplierQuote.setOperatorQuote(_calculateSupplierQuote_supplierQuoteOperatorQuote);
+	        try {
+	            com.orange.meerkat.interfaces.managesupplierquote.requestforquotation.v1.ebsmodel.csq.out.SupplierQuoteViewForCalculateSupplierQuoteResponse _calculateSupplierQuote__return = port.calculateSupplierQuote(_calculateSupplierQuote_supplierQuote);
+	            System.out.println("calculateSupplierQuote.result=" + _calculateSupplierQuote__return.getLocalAccessType());
+	            for (int i = 0; i < _calculateSupplierQuote__return.getQuoteItem().size(); i++) {
+	            	System.out.println("***************************");
+	    			System.out.println("getComments :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getComments());
+	    			System.out.println("getLocalExternalQuoteItemID :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getLocalExternalQuoteItemID());
+	    			System.out.println("getLocalMeerkatQuoteItemID :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getLocalMeerkatQuoteItemID());
+	    			System.out.println("getLocalRefId :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getLocalRefId());
+	    			System.out.println("getQuoteItemID :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getQuoteItemID());
+
+	    			System.out.println("getLocalResponseStatus :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getLocalResponseStatus());
+	    			System.out.println("getLocalResponseType :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getLocalResponseType());
+	    			System.out.println("getLocalValidityEndDate :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getLocalValidityEndDate());
+	    			System.out.println("getLocalValidityStartDate: "+_calculateSupplierQuote__return.getQuoteItem().get(i).getLocalValidityStartDate());
+	    			//wanted
+	    			System.out.println("getAreaCovered :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getAreaCovered());
+	    			System.out.println("getCarrierQuoteRef :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getCarrierQuoteRef());
+	    			System.out.println("getNumberOfIP :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getNumberOfIP());
+	    			System.out.println("getOfferGrade :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getOfferGrade());
+	    			System.out.println("getOfferId :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getOfferId());
+	    			System.out.println("getOfferSpecificationCode :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getOfferSpecificationCode());
+	    			System.out.println("getOfferSpecificationLabel :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getOfferSpecificationLabel());
+	    			System.out.println("getServiceAvailability :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getServiceAvailability());
+	    			System.out.println("getSymmetry :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getSymmetry());
+	    			System.out.println("getCurrency :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getCurrency().getCurrencyCode());
+	    			
+	    			//wanted 2
+	    			System.out.println("getLocalPricingResultType :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getLocalPricingResultType());
+	    			System.out.println("getProductSpecificationType :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getProductSpecificationType());
+	    			System.out.println("getSiteAccessType :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getSiteAccessType());
+	    			for (int j = 0; j <_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getFunctionSpecification().size(); j++) {
+			    			System.out.println("getFunctionSpecificationLabel :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getFunctionSpecification().get(j).getFunctionSpecificationLabel());
+			    			System.out.println("getFunctionValueSpecification :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getFunctionSpecification().get(j).getFunctionValueSpecification().getFunctionValue());
+		    			
+	    			}
+	    			for (int k = 0; k <_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getTariffSpecification().size(); k++) {
+		    			System.out.println("getTariffSpecificationCode :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getTariffSpecification().get(k).getTariffSpecificationCode());
+		    			System.out.println("getTariffValueSpec :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getTariffSpecification().get(k).getTariffValueSpec().getAmount());
+	    			}
+	    			System.out.println("getSubNetwork().getSubNetworkID :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getSubNetwork().getSubNetworkID());
+	    			System.out.println("getProductSpecification().getSubNetwork().getSubNetworkRole().getSubNetworkRoleName() :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getProductSpecification().getSubNetwork().getSubNetworkRole().getSubNetworkRoleName());
+	    			System.out.println("getOfferSpecification().getCatalogue().getOperator().getName() :"+_calculateSupplierQuote__return.getQuoteItem().get(i).getOfferSpecification().getCatalogue().getOperator().getName());
+	    			System.out.println("***************************");
+	    		}
+
+	        } catch (CalculateSupplierQuoteFault e) { 
+	            System.out.println("Expected exception: CalculateSupplierQuoteFault has occurred.");
+	            System.out.println(e.toString());
+	        }
+	        }
+		
+	}
+	
+	
+	//For inserting on Meerkat Database Request
+	public void insertintoRequesttable(String localRefId,String QuoteItemID,String country,String buildingnumber,String streetname,String postalcode,String lattitude,String longitude,String cityname,String statename,String serviceid,String servicename,String tech_input,String speed_input_down){
+		
+		
+        try { 
+ 
+          //step1 load the driver class  
+            Class.forName("oracle.jdbc.driver.OracleDriver");  
+              
+            //step2 create  the connection object  
+            Connection con=DriverManager.getConnection(  
+            "jdbc:oracle:thin:@10.237.59.104:1521:MEERKAT","meerkat","meerkat");  
+            
+            Statement st = con.createStatement(); 
+            st.executeUpdate("INSERT INTO webalc2_request " + 
+                "VALUES ('"+localRefId+"','"+QuoteItemID+"',CURRENT_TIMESTAMP,'"+country+"','"+buildingnumber+"','"+streetname+"','"+postalcode+"','"+lattitude+"','"+longitude+"','"+cityname+"','"+statename+"','"+serviceid+"','"+servicename+"','"+tech_input+"','"+speed_input_down+"')"); 
+            
+
+            con.close(); 
+        } catch (Exception e) { 
+            System.err.println("Got an exception! "); 
+            System.err.println(e.getMessage()); 
+        } 
+  
+   
+
+}
+	
+	
+	//For inserting on Meerkat Database Response
+		public void insertintoRequesttable(String localRefId,String QuoteItemID,String country,String buildingnumber,String streetname,String postalcode,String lattitude,String longitude,String cityname,String statename,String serviceid,String servicename,String tech_input,String speed_input_down){
+			
+			
+	        try { 
+	 
+	          //step1 load the driver class  
+	            Class.forName("oracle.jdbc.driver.OracleDriver");  
+	              
+	            //step2 create  the connection object  
+	            Connection con=DriverManager.getConnection(  
+	            "jdbc:oracle:thin:@10.237.59.104:1521:MEERKAT","meerkat","meerkat");  
+	            
+	            Statement st = con.createStatement(); 
+	            st.executeUpdate("INSERT INTO webalc2_request " + 
+	                "VALUES ('"+localRefId+"','"+QuoteItemID+"',CURRENT_TIMESTAMP,'"+country+"','"+buildingnumber+"','"+streetname+"','"+postalcode+"','"+lattitude+"','"+longitude+"','"+cityname+"','"+statename+"','"+serviceid+"','"+servicename+"','"+tech_input+"','"+speed_input_down+"')"); 
+	            
+
+	            con.close(); 
+	        } catch (Exception e) { 
+	            System.err.println("Got an exception! "); 
+	            System.err.println(e.getMessage()); 
+	        } 
+	  
+	   
+
+	}
+	
+}

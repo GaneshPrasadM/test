@@ -1,0 +1,15 @@
+127.0.0.1 - - [06/Oct/2017:08:03:32 +0530] "GET / HTTP/1.1" 404 992
+127.0.0.1 - - [06/Oct/2017:08:03:37 +0530] "GET /SpringTutor/ HTTP/1.1" 200 10790
+127.0.0.1 - - [06/Oct/2017:08:04:17 +0530] "POST /SpringTutor/myMapping HTTP/1.1" 404 1034
+0:0:0:0:0:0:0:1 - - [06/Oct/2017:08:05:08 +0530] "GET /SpringTutor/ HTTP/1.1" 200 10790
+0:0:0:0:0:0:0:1 - - [06/Oct/2017:08:06:44 +0530] "GET /SpringTutor/ HTTP/1.1" 200 10790
+127.0.0.1 - - [06/Oct/2017:08:12:57 +0530] "POST /SpringTutor/myMapping HTTP/1.1" 404 1034
+127.0.0.1 - - [06/Oct/2017:08:13:36 +0530] "GET / HTTP/1.1" 404 992
+0:0:0:0:0:0:0:1 - - [06/Oct/2017:08:13:55 +0530] "GET /SpringTutor/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Oct/2017:08:14:04 +0530] "POST /SpringTutor/myMapping HTTP/1.1" 200 12
+127.0.0.1 - - [06/Oct/2017:08:15:54 +0530] "POST /SpringTutor/myMapping HTTP/1.1" 200 2773
+127.0.0.1 - - [06/Oct/2017:08:22:28 +0530] "POST /SpringTutor/myMapping HTTP/1.1" 200 2773
+127.0.0.1 - - [06/Oct/2017:09:51:25 +0530] "GET / HTTP/1.1" 404 992
+127.0.0.1 - - [06/Oct/2017:09:51:36 +0530] "GET /SpringTutor/ HTTP/1.1" 200 10790
+127.0.0.1 - - [06/Oct/2017:09:53:20 +0530] "POST /SpringTutor/myMapping HTTP/1.1" 200 12
+127.0.0.1 - - [06/Oct/2017:10:04:57 +0530] "POST /SpringTutor/myMapping HTTP/1.1" 200 2773

@@ -1,0 +1,317 @@
+<html lang="en">
+<head>
+<!-- Theme Made By www.w3schools.com - No Copyright -->
+<title>Bootstrap Theme Company Page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
+<style>
+table,tr,th,td{
+	  border:1px solid #dddddd;
+	  border-collapse:collapse;
+	}
+	.tbl-header{
+	  width:calc(100% - 17px);
+	  width:-webkit-calc(100% - 17px);
+	  width:-moz-calc(100% - 17px);
+	}
+</style>	
+<script>
+$(document).ready(function () {
+
+    
+    // initialize the plugin
+        rules: {
+        	localRefId: {
+                required: true,
+            },
+            QuoteItemID: {
+                required: true,
+            },
+            buildingnumber: {
+		        required: true,
+				number: true
+			},
+			lattitude: {
+		        required: true,
+				number: true
+			},
+			longitude: {
+		        required: true,
+				number: true
+			},
+			cityname: {
+		        required: true,
+			},
+			statename: {
+                required: true
+				},
+			country: {
+                required: true
+            },
+            serviceid: {
+				required: true
+			},
+			tech-input: {
+				required: true
+			},
+			#speed-input: {
+				required: true
+			}
+			
+        },
+//messages: {
+//bnum: "First Name field cannot be blank!",
+//country: "Last Name field cannot be blank!",
+//},
+		messages: {
+bnum: "<div class='tooltipCls'><span class='tooltiptext'>Required(Number)</span></div>",
+	pcode: "<div class='tooltipCls'><span class='tooltiptext'>Required(Number)</span></div>",
+	lat: "<div class='tooltipCls'><span class='tooltiptext'>Required(Number)</span></div>",
+	lon: "<div class='tooltipCls'><span class='tooltiptext'>Required(Number)</span></div>",
+	csa: "<div class='tooltipCls'><span class='tooltiptext'>Address is required</span></div>",
+service: "<div class='tooltipCls'><span class='tooltiptext'>Service is required</span></div>",
+country: "<div class='tooltipCls'><span class='tooltiptext'>Please Select Country</span></div>",
+//state: "<div class='tooltipCls'><span class='tooltiptext'>Please Select State</span></div>"
+nipadd: "<div class='tooltipCls'><span class='tooltiptext'>Select no. of IP address</span></div>",
+tipadd: "<div class='tooltipCls'><span class='tooltiptext'>Select type of IP address</span></div>",
+spd: "<div class='tooltipCls'><span class='tooltiptext'>Speed is Required</span></div>",
+ld: "<div class='tooltipCls'><span class='tooltiptext'>Load is Required</span></div>",
+tas: "<div class='tooltipCls'><span class='tooltiptext'>Technology Access Speed is required</span></div>"
+     },
+  });
+});
+</script>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar"
+	data-offset="60">
+
+	
+
+
+
+	<!-- Container (About Section) -->
+	<!-- Container (Pricing Section) -->
+	<div id="pricing" class="container-fluid">
+	  <div class="text-center">
+		  <h2>WebALC 2.0 </h2>
+		</div>
+		<div class="row slideanim">
+			<div class="col-sm-4 col-xs-12"></div>
+			<div class="col-sm-4 col-xs-12">
+				<div class="panel panel-default text-center">
+					<div class="panel-heading">
+						<h3>Create Quotes/Requests</h3>
+					</div>
+					<div class="panel-body">
+						
+						<div class="form-group">
+							<div class="pull-left">
+								<label for="email">Postal Code: </label>
+							</div>
+							<input class="form-control" id="postalcode" name="postalcode"
+								placeholder="" required="" type="text">
+						</div>
+						<div class="form-group">
+							<div class="pull-left">
+								<label for="lattitude">Lattitude</label>
+							</div>
+							<input class="form-control" id="lattitude" name="lattitude"
+								placeholder="" required="" tabindex="2" type="text">
+						</div>
+						<div class="form-group">
+							<div class="pull-left">
+								<label for="longitude">Longitude</label>
+							</div>
+							<input class="form-control" id="longitude" name="longitude"
+								placeholder="" required="" tabindex="2" type="text">
+						</div>
+						<div class="form-group">
+							<div class="pull-left">
+								<label for="city">City</label>
+							</div>
+							<input class="form-control" id="cityname" name="cityname"
+								placeholder="" required="" tabindex="2" type="text">
+						</div>
+						<div class="form-group">
+							<div class="pull-left">
+								<label for="state">State</label>
+							</div>
+							<input class="form-control" id="statename" name="statename"
+								placeholder="" required="" tabindex="2" type="text">
+						</div>
+						<div class="form-group">
+							<div class="pull-left">
+								<label for="name">Service:</label>
+							</div>
+							<select class="form-control" id="serviceid" name="serviceid">
+								<option value="select">Select Service</option>
+								<option value="47">Business VPN Small Vendor Managed</option>
+								<option value="46">Vender Managed Internet</option>
+								<option value="42">Business VPN Corporate</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<div class="pull-left">
+								<label for="name">Technology:</label>
+							</div>
+							<select class="form-control" id="tech-input" name="tech-input">
+								<option value="select">Select Technology</option>
+								<option value="Ethernet">Ethernet</option>
+								<option value="LL">LL</option>
+								<option value="WLL">WLL</option>
+								<option value="VDSL">VDSL</option>
+								<option value="FIBER">FIBER</option>
+								<option value="EFM/EoC">EFM/EoC</option>
+								<option value="ME">ME</option>
+							</select>
+							<div class="form-group">
+								<div class="pull-left">
+									<label for="name">Speed:</label>
+								</div>
+								<select class="form-control" id="speed-input" name="speed-input">
+									<option value="select">Select Speed</option>
+									<!-- <option value="2048/2048">2048 / 2048</option>
+									<option value="4096/4096">4096 / 4096</option>
+									<option value="6144/6144">6144 / 6144</option>
+									<option value="8192/8192">8192 / 8192</option>
+									<option value="10240/10240">10240 / 10240</option>
+									<option value="20480/20480">20480 / 20480</option> -->
+									<option value="1000">1 Mbps</option>
+									<option value="2000">2 Mbps</option>
+									<option value="3000">3 Mbps</option>
+									<option value="4000">4 Mbps</option>
+									<option value="5000">5 Mbps</option>
+									<option value="6000">6 Mbps</option>
+									<option value="7000">7 Mbps</option>
+									<option value="8000">8 Mbps</option>
+									<option value="9000">9 Mbps</option>
+									<option value="10000">10 Mbps</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="pull-right">
+					<button class="btn btn-primary" 
+						onclick="callToController()">Generate</button>
+					<button class="btn btn-primary">Reset</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 col-xs-12"></div>
+	</div>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="jumbotron">
+
+<div class="table-responsive">
+	
+	<table class="table table-bordered" id="table" name="table">
+								<thead id="tablehead" style="align:center">
+			<th>SLno</th>					
+			<th>Local Ref Id</th>
+			<th>Quote Item Id</th>
+			<th>Country</th>
+			<th>City</th>
+			<th>Address</th>
+			<th>Postal Code</th>
+			<th>Access Speed</th>
+			<th>Technology</th>
+			<th>Service</th>
+			<th>MRP(Monthly Recurring Price)</th>
+			<th>OTP(One Time Price)</th>
+			<th>Currency</th>
+			<th>Contract Duration</th>
+			<th>Provider</th>
+			<th>Comments</th>
+
+		</thead>
+								<tbody id="table">
+								</tbody>
+							</table>
+							</div>
+							</div>
+							</div>
+
+	<footer class="container-fluid text-center">
+		<a href="#myPage" title="To Top"> <span
+			class="glyphicon glyphicon-chevron-up"></span>
+		</a>
+		<p>
+			<a href="https://www.ionidea.com" title="Visit w3schools">www.ionidea.com</a>
+		</p>
+	</footer>
+
+<a href="NewFile.jsp">Click Here</a>
+<script type="text/javascript">
+
+function callToController(){
+	console.log("Inside Method");
+	var localRefId = $('#localRefId').val();
+	localStorage.setItem("localRefId", localRefId);
+	var QuoteItemID = $('#QuoteItemID').val();
+	var country=$("#country option:selected").val();
+	var buildingnumber=$('#buildingnumber').val();
+	var streetname=$('#streetname').val();
+	var postalcode=$('#postalcode').val();
+	var lattitude=$('#lattitude').val();
+	var longitude=$('#longitude').val();
+	var cityname=$('#cityname').val();
+	var statename=$('#statename').val();
+	var serviceid=$("#serviceid option:selected").val();
+	var servicename=$("#serviceid option:selected").text();
+	var tech_input=$('#tech-input').val();
+	var speed_input=$('#speed-input').val();
+	
+	post_data={
+			'localRefId' : localRefId,
+			 'quoteItemID': QuoteItemID,
+			 'country' : country,
+			 'buildingnumber' : buildingnumber,
+			 'streetname' : streetname,
+			 'postalcode' : postalcode,
+			 'lattitude' : lattitude,
+			 'longitude' : longitude,
+			 'cityname' : cityname,
+			 'statename' : statename,
+			 'serviceid' : serviceid,
+			 'servicename' : servicename,
+			 'tech_input' : tech_input,
+			 'speed_input' : speed_input
+	}
+	post_data=JSON.stringify(post_data);
+	console.log(post_data);
+	$.ajax({
+		type : "POST",
+		url : 'myMapping',
+		data : post_data,
+		contentType : 'application/json',
+		success : function(response) {
+			alert("Quote Successful");
+			console.log(JSON.stringify(response));
+			var data=response;
+			for(var i=1 in data){
+				$("#table").append('<tr><td>'+(i+1)+'</td><td>'+data[i].localrefenceceid+'</td><td>'+data[i].quoteitemid+'</td><td>'+data[i].country1+'</td><td>'+data[i].cityname1+'</td><td>'+data[i].address1+'</td><td>'+data[i].postalcode1+'</td><td>'+data[i].speed1+'</td><td>'+data[i].technology1+'</td><td>'+data[i].servicename1+'</td><td>'+data[i].mrc_value+'</td><td>'+data[i].nrc_value+'</td><td>'+data[i].currency+'</td><td>'+data[i].contactduratio+'</td><td>'+data[i].provider+'</td><td>'+data[i].comments+'</td></tr>');
+
+			}
+		}
+	});
+}
+
+</script>
+</body>
+</html>
