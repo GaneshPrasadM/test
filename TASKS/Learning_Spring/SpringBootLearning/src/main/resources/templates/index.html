@@ -1,0 +1,49 @@
+<html lang="en">  
+    <head>  
+        <title>Index Page</title>  
+    </head>  
+    <body>  
+        <form action="save" method="post">  
+            <table> 
+             <tr>  
+                    <td><label for="id">id</label></td>  
+                    <td><input type="text" name="id" id="id"></input></td>  
+                </tr> 
+                <tr>  
+                    <td><label for="user-name">User Name</label></td>  
+                    <td><input type="text" name="name" id="name"></input></td>  
+                </tr>  
+                <tr>  
+                    <td><label for="email">Email</label></td>  
+                    <td><input type="text" name="email" id="email"></input></td>  
+                </tr>  
+                <tr>  
+                    <td></td>  
+                    <td><input type="submit" value="Submit" onclick="submit()"></input></td>  
+                </tr>  
+            </table>  
+        </form>  
+    </body>  
+    <script>
+    function submit(){
+    
+    console.log("Inside Submit");
+//     	console.log(document.getElementById("id").value());
+//     	console.log(document.getElementById("name").value());
+//     	console.log(document.getElementById("email").value());
+    
+//     var jsonData={
+//     		"id":,
+//     		"name":,
+//     		"email":
+    		
+//     };
+//     $.ajax({
+//     	  url: "/",
+//     	  type: "POST",
+//     	  data: jsonData,
+//     	  dataType: "application/json"
+//     	});
+    }
+    </script>
+</html>  
