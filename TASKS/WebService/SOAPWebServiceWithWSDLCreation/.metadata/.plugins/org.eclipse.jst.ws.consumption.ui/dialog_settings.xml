@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.jst.ws.client.type.java">
+		<item value="/client/src/wsdl/requesthandler.wsdl"/>
+		<item value="/client/src/wsdl/RequestHandler.wsdl"/>
+	</list>
+</section>

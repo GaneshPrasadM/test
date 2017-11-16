@@ -1,0 +1,92 @@
+package com.websystique.spring.configuration;
+
+import java.util.Arrays;
+
+import javax.jms.ConnectionFactory;
+
+import org.apache.activemq.spring.ActiveMQConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.connection.CachingConnectionFactory;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.listener.DefaultMessageListenerContainer;
+import org.springframework.jms.listener.MessageListenerContainer;
+import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.jms.support.converter.SimpleMessageConverter;
+
+
+@Configuration
+public class MessagingConfiguration {
+
+	private static final String DEFAULT_BROKER_URL = "tcp://localhost:61616";
+	
+	private static final String P1 = "P1";
+	private static final String P2 = "P2";
+	private static final String P3 = "P3";
+	private static final String P4 = "P4";
+	private static final String ORDER_RESPONSE_QUEUE = "order-response-queue";
+	
+
+	
+	@Bean
+	public ConnectionFactory connectionFactory(){
+		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
+		connectionFactory.setBrokerURL(DEFAULT_BROKER_URL);
+		//connectionFactory.setTrustedPackages(Arrays.asList("com.websystique.spring"));
+		return connectionFactory;
+	}
+
+	@Bean
+	public ConnectionFactory cachingConnectionFactory(){
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+		connectionFactory.setTargetConnectionFactory(connectionFactory());
+		connectionFactory.setSessionCacheSize(10);
+		return connectionFactory;
+	}
+	
+	
+
+	/*
+	 * Used here for Sending Messages.
+	 */
+	@Bean 
+	public JmsTemplate jmsTemplate1(){	
+		JmsTemplate template = new JmsTemplate();
+		template.setConnectionFactory(connectionFactory());
+		template.setDefaultDestinationName(P1);
+		return template;
+	}
+	
+	
+	@Bean 
+	public JmsTemplate jmsTemplate2(){	
+		JmsTemplate template = new JmsTemplate();
+		template.setConnectionFactory(connectionFactory());
+		template.setDefaultDestinationName(P2);
+		return template;
+	}
+	
+	@Bean 
+	public JmsTemplate jmsTemplate3(){	
+		JmsTemplate template = new JmsTemplate();
+		template.setConnectionFactory(connectionFactory());
+		template.setDefaultDestinationName(P3);
+		return template;
+	}
+	
+	@Bean 
+	public JmsTemplate jmsTemplate4(){	
+		JmsTemplate template = new JmsTemplate();
+		template.setConnectionFactory(connectionFactory());
+		template.setDefaultDestinationName(P4);
+		return template;
+	}
+	
+	
+	@Bean 
+	MessageConverter converter(){
+		return new SimpleMessageConverter();
+	}
+	
+}

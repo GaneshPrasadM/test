@@ -1,0 +1,10 @@
+127.0.0.1 - - [30/Aug/2017:11:28:02 +0530] "GET / HTTP/1.1" 404 992
+127.0.0.1 - - [30/Aug/2017:12:12:13 +0530] "GET / HTTP/1.1" 404 992
+127.0.0.1 - - [30/Aug/2017:12:12:17 +0530] "GET /meerkatWSDLservice/ HTTP/1.1" 404 1030
+127.0.0.1 - - [30/Aug/2017:12:20:53 +0530] "GET / HTTP/1.1" 404 992
+127.0.0.1 - - [30/Aug/2017:12:20:54 +0530] "GET /meerkatWSDLservice/ HTTP/1.1" 404 1030
+127.0.0.1 - - [30/Aug/2017:12:22:30 +0530] "GET /meerkatWSDLservice/requesthandler?wsdl HTTP/1.1" 404 1058
+127.0.0.1 - - [30/Aug/2017:12:22:36 +0530] "GET /meerkatWSDLservice/service.requesthandler?wsdl HTTP/1.1" 404 1074
+127.0.0.1 - - [30/Aug/2017:12:22:45 +0530] "GET /meerkatWSDLservice/service/requesthandler?wsdl HTTP/1.1" 404 1074
+127.0.0.1 - - [30/Aug/2017:12:22:50 +0530] "GET /meerkatWSDLservice/services/requesthandler?wsdl HTTP/1.1" 200 2168
+127.0.0.1 - - [30/Aug/2017:12:24:50 +0530] "POST /meerkatWSDLservice/services/requesthandler?wsdl HTTP/1.1" 200 250

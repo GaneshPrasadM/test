@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><xs:schema xmlns:tns="http://meerkatWSDLservice/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://meerkatWSDLservice/" version="1.0">
+<xs:element name="ServiceProvider" type="tns:ServiceProvider"/>
+<xs:element name="ServiceProviderResponse" type="tns:ServiceProviderResponse"/>
+<xs:complexType name="ServiceProvider">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:parameter"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="parameter">
+    <xs:sequence>
+      <xs:element name="buldingNumber" type="xs:int"/>
+      <xs:element minOccurs="0" name="city" type="xs:string"/>
+      <xs:element minOccurs="0" name="country" type="xs:string"/>
+      <xs:element name="latitude" type="xs:int"/>
+      <xs:element name="load" type="xs:int"/>
+      <xs:element name="longitude" type="xs:int"/>
+      <xs:element name="postalCOde" type="xs:int"/>
+      <xs:element minOccurs="0" name="service" type="xs:string"/>
+      <xs:element name="speed" type="xs:int"/>
+      <xs:element minOccurs="0" name="state" type="xs:string"/>
+      <xs:element minOccurs="0" name="streetName" type="xs:string"/>
+      <xs:element minOccurs="0" name="technology" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="ServiceProviderResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

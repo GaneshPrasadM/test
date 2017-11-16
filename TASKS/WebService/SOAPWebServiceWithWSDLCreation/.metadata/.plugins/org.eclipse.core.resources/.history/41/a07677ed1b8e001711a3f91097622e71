@@ -1,0 +1,69 @@
+package com.websystique.spring.configuration;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.jws.WebService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+
+import com.websystique.spring.model.MeerkatParameters;
+import com.websystique.spring.service.MeerkatParametersService;
+
+@WebService(targetNamespace = "http://meerkatWSDLservice/", portName = "RequestHandlerPort", serviceName = "RequestHandlerService")
+
+public class ProducerApplication {
+
+	static final Logger LOG = LoggerFactory.getLogger(ProducerApplication.class);
+	
+	private static AtomicInteger id = new AtomicInteger();
+	
+	public static void main(String[] args){
+		AbstractApplicationContext context = new AnnotationConfigApplicationContext(
+                AppConfig.class);
+ 
+      //  ProductService productService = (ProductService) context.getBean("productService");
+        MeerkatParametersService meerkatParametersService=(MeerkatParametersService) context.getBean("meerkatParametersService");
+        
+     //   Product product = getProduct();
+        MeerkatParameters meerkatParameters=getMeerkatParameters(MeerkatParameters meerkatParameters);
+    //    LOG.info("Application : sending order {}", product);
+    //    productService.sendProduct(product);
+        meerkatParametersService.sendParameters(meerkatParameters);
+        try {
+			Thread.sleep(60000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+        ((AbstractApplicationContext)context).close();
+	}
+	
+	
+//	private static Product getProduct() {
+//		Product p = new Product();
+//		p.setName("Product "+id.incrementAndGet());
+//		p.setProductId(BasicUtil.getUniqueId());
+//		p.setQuantity(2);
+//		return null;
+//	}
+
+
+	private static MeerkatParameters getMeerkatParameters(MeerkatParameters meerkatParameters){
+		meerkatParameters.setBuldingNumber(meerkatParameters.getBuldingNumber());
+		meerkatParameters.setStreetName(meerkatParameters.getStreetName());
+		meerkatParameters.setPostalCode(meerkatParameters.getPostalCode());
+		meerkatParameters.setLatitude(meerkatParameters.getLatitude());
+		meerkatParameters.setLongitude(meerkatParameters.getLongitude());
+		meerkatParameters.setCity(meerkatParameters.getCity());
+		meerkatParameters.setCountry(meerkatParameters.getCountry());
+		meerkatParameters.setState(meerkatParameters.getState());
+		meerkatParameters.setService(meerkatParameters.getService());
+		meerkatParameters.setTechnology(meerkatParameters.getTechnology());
+		meerkatParameters.setSpeed(meerkatParameters.getSpeed());
+		meerkatParameters.setLoad(meerkatParameters.getLoad());
+		return null;
+	}
+}

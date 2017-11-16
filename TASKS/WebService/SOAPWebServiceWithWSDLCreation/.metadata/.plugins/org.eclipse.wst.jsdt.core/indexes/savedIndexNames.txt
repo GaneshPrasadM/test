@@ -1,0 +1,8 @@
+INDEX VERSION 1.3+E:\TASKS\WebService\SOAPWebServiceWithWSDLCreation\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+698484382.index
+3118777499.index
+3099629521.index
+3495897729.index
+262142283.index
+2947920322.index
+504705497.index

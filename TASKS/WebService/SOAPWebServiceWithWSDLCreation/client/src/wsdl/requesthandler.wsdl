@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="RequestHandlerService" targetNamespace="http://meerkatWSDLservice/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://meerkatWSDLservice/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://meerkatWSDLservice/" schemaLocation="requesthandler_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="ServiceProviderResponse">
+    <wsdl:part name="parameters" element="tns:ServiceProviderResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ServiceProvider">
+    <wsdl:part name="parameters" element="tns:ServiceProvider">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RequestHandler">
+    <wsdl:operation name="ServiceProvider">
+      <wsdl:input name="ServiceProvider" message="tns:ServiceProvider">
+    </wsdl:input>
+      <wsdl:output name="ServiceProviderResponse" message="tns:ServiceProviderResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RequestHandlerServiceSoapBinding" type="tns:RequestHandler">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ServiceProvider">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="ServiceProvider">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ServiceProviderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RequestHandlerService">
+    <wsdl:port name="RequestHandlerPort" binding="tns:RequestHandlerServiceSoapBinding">
+      <soap:address location="http://localhost:8080/meerkatWSDLservice/services/requesthandler?wsdl"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
